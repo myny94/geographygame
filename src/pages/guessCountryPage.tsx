@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import GeoSVG from '../components/GeoSVG'
-import { sendAnswerToServer, startGame } from '../utils/eventHandler'
+import { askForHint, sendAnswerToServer, startGame } from '../utils/eventHandler'
 import { ServerEvent } from '../types'
 import { set } from 'zod'
 
@@ -21,6 +21,9 @@ function GuessCountryPage() {
         setGeoUrl(serverEvent.geoImageUrl)
         setMessage('')
         break
+      case 'give_hint':
+        setMessage(serverEvent.hint)
+        break
     }
   }
 
@@ -40,6 +43,13 @@ function GuessCountryPage() {
     })
     handleServerEvent(response)
     setCountryInput('')
+  }
+  
+  const askHint = async () => {
+    const response = await askForHint({
+      questionId: questionId
+    })
+    handleServerEvent(response)
   }
   return (
     <>
@@ -65,6 +75,13 @@ function GuessCountryPage() {
             onClick={submitAnswer}
           >
             Guess
+          </button>
+          <button
+            type="button"
+            className="text-white focus:ring-2 rounded-lg text-sm p-3 py-2 dark:bg-gray-800 dark:hover:bg-gray-600"
+            onClick={askHint}
+          >
+            ask for hint
           </button>
         </div>
         <div className="flex justify-center items-center">{message}</div>

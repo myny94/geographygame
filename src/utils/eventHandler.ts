@@ -1,4 +1,4 @@
-import { ClientEvent, ServerEvent, ServerEventSchema } from '../types'
+import { ClientEvent, ServerEventSchema } from '../types'
 
 export const generateRandomCountry = () => {
   const countryId = fetch('http://localhost:8080/country')
@@ -50,6 +50,24 @@ export const startGame = () => {
       validateClientEvent({
         type: 'start',
         nickname: 'test-user',
+      })
+    ),
+  })
+    .then(response => response.json())
+    .then(data => ServerEventSchema.parse(data))
+  return serverResponse
+}
+
+export const askForHint = ({ questionId }: { questionId: string }) => {
+  const serverResponse = fetch('http://localhost:8080/event', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(
+      validateClientEvent({
+        type: 'ask_hint',
+        questionId: questionId,
       })
     ),
   })
