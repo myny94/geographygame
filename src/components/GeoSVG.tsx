@@ -1,12 +1,12 @@
 type GeoSVGProps = {
-  countryId: string
+  geoURL: string
 }
 
-function GeoSVG({ countryId }: GeoSVGProps) {
+function GeoSVG({ geoURL }: GeoSVGProps) {
   return (
     <>
-      <div className='card'>
-        <img src={`http://localhost:8080/geosvg/${countryId}`}></img>
+      <div className="flex p-8 justify-center items-center">
+        <img className="h-[50vh]" src={geoURL}></img>
       </div>
     </>
   )

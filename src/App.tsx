@@ -1,23 +1,18 @@
-import GeoSVG from './components/GeoSVG'
+import { Routes, Route, BrowserRouter } from 'react-router-dom'
+import GuessCountryPage from './pages/guessCountryPage'
 
 function App() {
   return (
     <>
-      <div className="font-mono">Guess the country</div>
-      <GeoSVG countryId='85632307'/>
+      <h1 className="font-extrabold text-2xl text-center m-3">GeoGeeks</h1>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<GuessCountryPage />} />
+          <Route path="*" element={<p>There is nothing here: 404!</p>} />
+        </Routes>
+      </BrowserRouter>
     </>
   )
 }
 
 export default App
-
-/*
-api_method('../id') {
-  database save json??
-  local file
-  1. get json data by country id
-  (fs.readFile('..../{id}'))
-  2. json2svg function
-  3. return svg
-}
-* */
