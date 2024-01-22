@@ -34,6 +34,7 @@ export const sendAnswerToServer = ({
         questionId: questionId,
       })
     ),
+    credentials: 'include',
   })
     .then(response => response.json())
     .then(data => ServerEventSchema.parse(data))
@@ -52,6 +53,7 @@ export const startGame = () => {
         nickname: 'test-user',
       })
     ),
+    credentials: 'include',
   })
     .then(response => response.json())
     .then(data => ServerEventSchema.parse(data))
@@ -70,6 +72,7 @@ export const askForHint = ({ questionId }: { questionId: string }) => {
         questionId: questionId,
       })
     ),
+    credentials: 'include',
   })
     .then(response => response.json())
     .then(data => ServerEventSchema.parse(data))
